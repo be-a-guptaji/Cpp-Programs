@@ -1,37 +1,18 @@
-//Aurthor := Aryan Baadlas
-//Date    := 9th May 2024
+#include <iostream>
+#include <vector>
+#include <queue>
 
-#include <stdio.h>
-#include <conio.h>
+using namespace std;
 
 #define MAX 50
 
-int process = 0, processes = 0, total_time = 0, time_quantum = 0, arrival_time[MAX], burst_time[MAX], completion_time[MAX], turn_around_time[MAX], waiting_time[MAX], response_time[MAX], burst_copy[MAX], ready_queue[MAX], ready_index = 0, running_index = 0, time_queue[MAX], average_turn_around_time = 0, average_waiting_time = 0, average_response_time = 0;
+int process = 0, processes = 0, total_time = 0, time_quantum = 0;
+vector<int> arrival_time(MAX), burst_time(MAX), completion_time(MAX), turn_around_time(MAX), waiting_time(MAX), response_time(MAX);
+vector<int> burst_copy(MAX), ready_queue(MAX), time_queue(MAX);
 
-void main()
+void calculate_times()
 {
-    printf("Enter the number of PROCESSES: \t");
-    scanf("%d", &processes);
-
-    printf("Enter the TIME QUANTUM: \t");
-    scanf("%d", &time_quantum);
-
-    printf("Enter the ARRIVAL TIME of each process: \n");
-    for (int i = 0; i < processes; i++)
-    {
-        printf("Process %d: \t", i + 1);
-        scanf("%d", &arrival_time[i]);
-    }
-
-    printf("Enter the BURST TIME of each process: \n");
-    for (int i = 0; i < processes; i++)
-    {
-        printf("Process %d: \t", i + 1);
-        scanf("%d", &burst_time[i]);
-        burst_copy[i] = burst_time[i];
-    }
-
-    time_queue[0] = 0;
+    int ready_index = 0, running_index = 0;
 
     while (process < processes)
     {
@@ -39,15 +20,14 @@ void main()
 
         while (arrival_time[process] <= total_time && process < processes)
         {
-            ready_queue[ready_index] = process;
-            ready_index++;
+            ready_queue[ready_index++] = process;
             process++;
         }
+
         if (burst_copy[ready_queue[running_index]] > time_quantum)
         {
             burst_copy[ready_queue[running_index]] -= time_quantum;
-            ready_queue[ready_index] = ready_queue[running_index];
-            ready_index++;
+            ready_queue[ready_index++] = ready_queue[running_index];
             time_queue[running_index + 1] = time_queue[running_index] + time_quantum;
         }
         else
@@ -55,6 +35,7 @@ void main()
             time_queue[running_index + 1] = time_queue[running_index] + burst_copy[ready_queue[running_index]];
             burst_copy[ready_queue[running_index]] = 0;
         }
+
         running_index++;
     }
 
@@ -63,9 +44,8 @@ void main()
         if (burst_copy[ready_queue[running_index]] > time_quantum)
         {
             burst_copy[ready_queue[running_index]] -= time_quantum;
-            ready_queue[ready_index] = ready_queue[running_index];
+            ready_queue[ready_index++] = ready_queue[running_index];
             time_queue[running_index + 1] = time_queue[running_index] + time_quantum;
-            ready_index++;
         }
         else
         {
@@ -86,15 +66,44 @@ void main()
         }
         completion_time[i] = time_queue[running_index + 1];
     }
+}
 
-    printf("P.No.\tArrival Time\tBurst Time\tCompletion Time\t\tTurn Around Time\tWaiting Time   Response Time\n");
+int main()
+{
+    cout << "Enter the number of PROCESSES: ";
+    cin >> processes;
+
+    cout << "Enter the TIME QUANTUM: ";
+    cin >> time_quantum;
+
+    cout << "Enter the ARRIVAL TIME of each process:\n";
+    for (int i = 0; i < processes; i++)
+    {
+        cout << "Process " << i + 1 << ": ";
+        cin >> arrival_time[i];
+    }
+
+    cout << "Enter the BURST TIME of each process:\n";
+    for (int i = 0; i < processes; i++)
+    {
+        cout << "Process " << i + 1 << ": ";
+        cin >> burst_time[i];
+        burst_copy[i] = burst_time[i];
+    }
+
+    time_queue[0] = 0;
+    calculate_times();
+
+    float average_turn_around_time = 0, average_waiting_time = 0, average_response_time = 0;
+
+    cout << "P.No.\tArrival Time\tBurst Time\tCompletion Time\tTurn Around Time\tWaiting Time\tResponse Time\n";
 
     for (int i = 0; i < processes; i++)
     {
         turn_around_time[i] = completion_time[i] - arrival_time[i];
         waiting_time[i] = turn_around_time[i] - burst_time[i];
 
-        for (int j = 0; j < ready_index; j++)
+        for (int j = 0; j < ready_queue.size(); j++)
         {
             if (ready_queue[j] == i)
             {
@@ -107,12 +116,13 @@ void main()
         average_waiting_time += waiting_time[i];
         average_response_time += response_time[i];
 
-        printf("%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\t\t%d\t\t%d\n", i + 1, arrival_time[i], burst_time[i], completion_time[i], turn_around_time[i], waiting_time[i], response_time[i]);
+        cout << i + 1 << "\t\t" << arrival_time[i] << "\t\t" << burst_time[i] << "\t\t" << completion_time[i]
+             << "\t\t\t" << turn_around_time[i] << "\t\t\t" << waiting_time[i] << "\t\t" << response_time[i] << endl;
     }
 
-    printf("\nAverage Turn Around Time: %f\n", (float)average_turn_around_time / processes);
-    printf("Average Waiting Time: %f\n", (float)average_waiting_time / processes);
-    printf("Average Response Time: %f\n", (float)average_response_time / processes);
+    cout << "\nAverage Turn Around Time: " << (float)average_turn_around_time / processes << endl;
+    cout << "Average Waiting Time: " << (float)average_waiting_time / processes << endl;
+    cout << "Average Response Time: " << (float)average_response_time / processes << endl;
 
-    getch();
+    return 0;
 }
