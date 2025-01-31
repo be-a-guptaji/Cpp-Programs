@@ -8,10 +8,10 @@ private:
     struct Node
     {
         int info;
-        Node* next;
+        Node *next;
     };
 
-    Node* head;
+    Node *head;
 
 public:
     Stack()
@@ -21,7 +21,7 @@ public:
 
     void push()
     {
-        Node* traverser = new Node;
+        Node *traverser = new Node;
 
         if (traverser == nullptr)
         {
@@ -48,7 +48,7 @@ public:
             return;
         }
 
-        Node* traverser = head;
+        Node *traverser = head;
 
         if (head->next == nullptr)
         {
@@ -71,7 +71,7 @@ public:
             return;
         }
 
-        Node* traverser = head;
+        Node *traverser = head;
 
         while (traverser != nullptr)
         {
