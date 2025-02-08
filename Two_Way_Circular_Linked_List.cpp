@@ -1,25 +1,22 @@
-#include <stdio.h>
-#include <conio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
 
 // Global Variable to use everywhere in code....
-
 int choice = 0, data, after_node;
 
 // We make replica of this structure....
-
 struct Node
 {
     int info;
-    struct Node *previous ,*next;
+    struct Node *previous, *next;
 };
 
 // This stores the first address of the structure....
-
 struct Node *head, *traverser, *found, *temp;
 
 // Functions for Implementation....
-
 int check_memory(int choice)
 {
     if (choice < 4)
@@ -28,7 +25,7 @@ int check_memory(int choice)
 
         if (traverser == NULL)
         {
-            printf("\n----------OVERFLOW----------\n");
+            cout << "\n----------OVERFLOW----------\n";
             return 0;
         }
 
@@ -38,7 +35,7 @@ int check_memory(int choice)
     {
         if (head == NULL)
         {
-            printf("\n----------UNDERFLOW----------\n");
+            cout << "\n----------UNDERFLOW----------\n";
             return 0;
         }
         return 1;
@@ -47,8 +44,8 @@ int check_memory(int choice)
 
 void insertion_at_the_beginning()
 {
-    printf("Enter DATA to insert at the BEGINNING OF THE NODE : ");
-    scanf("%d", &data);
+    cout << "Enter DATA to insert at the BEGINNING OF THE NODE : ";
+    cin >> data;
 
     traverser->info = data;
 
@@ -81,17 +78,17 @@ void insertion_at_the_beginning()
 
 void insertion_at_the_middle()
 {
-    printf("Enter DATA to insert at the MIDDLE OF THE NODE : ");
-    scanf("%d", &data);
+    cout << "Enter DATA to insert at the MIDDLE OF THE NODE : ";
+    cin >> data;
 
-    printf("Enter DATA after which you want to INSERT the NODE : ");
-    scanf("%d", &after_node);
+    cout << "Enter DATA after which you want to INSERT the NODE : ";
+    cin >> after_node;
 
     traverser->info = data;
 
     if (head == NULL)
     {
-        printf("\nNO ELEMENT FOUND IN LINK LIST\n");
+        cout << "\nNO ELEMENT FOUND IN LINK LIST\n";
         return;
     }
 
@@ -130,14 +127,14 @@ void insertion_at_the_middle()
     }
     else
     {
-        printf("The Element %d is not in Linked List.\n", after_node);
+        cout << "The Element " << after_node << " is not in Linked List.\n";
     }
 }
 
 void insertion_at_the_end()
 {
-    printf("Enter DATA to insert at the END OF THE NODE : ");
-    scanf("%d", &data);
+    cout << "Enter DATA to insert at the END OF THE NODE : ";
+    cin >> data;
 
     traverser->info = data;
 
@@ -164,7 +161,7 @@ void insertion_at_the_end()
 
 void deletion_at_the_beginning()
 {
-    printf("DELETION OF NODE FROM THE BEGINNING : \n");
+    cout << "DELETION OF NODE FROM THE BEGINNING : \n";
 
     traverser = head;
 
@@ -201,10 +198,9 @@ void deletion_at_the_beginning()
 
 void deletion_at_the_middle()
 {
-
-    printf("DELETION OF NODE FROM THE MIDDLE : \n");
-    printf("Enter DATA which you want to DELETE the NODE : ");
-    scanf("%d", &after_node);
+    cout << "DELETION OF NODE FROM THE MIDDLE : \n";
+    cout << "Enter DATA which you want to DELETE the NODE : ";
+    cin >> after_node;
 
     if (head->info == after_node && head->next == head && head->previous == head)
     {
@@ -256,13 +252,13 @@ void deletion_at_the_middle()
     }
     else
     {
-        printf("The Element %d is not in Linked List.\n", after_node);
+        cout << "The Element " << after_node << " is not in Linked List.\n";
     }
 }
 
 void deletion_at_the_end()
 {
-    printf("DELETION OF NODE FROM THE END : \n");
+    cout << "DELETION OF NODE FROM THE END : \n";
 
     traverser = head;
 
@@ -270,7 +266,7 @@ void deletion_at_the_end()
     {
         free(head);
         head = NULL;
-        printf("\n----------DONE----------\n");
+        cout << "\n----------DONE----------\n";
         return;
     }
 
@@ -290,7 +286,7 @@ void deletion_at_the_end()
 void traverse_the_list()
 {
     int choose;
-    printf("TRAVAERSING OF THE LINKED LIST :\n");
+    cout << "TRAVERSING OF THE LINKED LIST :\n";
 
     while (choose != 4)
     {
@@ -298,10 +294,10 @@ void traverse_the_list()
 
         traverser = head;
 
-        printf("\nPRESS 1 to TRAVERSE BACKWARD in Link List.\nPRESS 2 to TRAVERSE NORMALY in Link List.\nPRESS 3 to TRAVERSE MANUALLY in Link List.\nPRESS 4 to EXIT.\n");
+        cout << "\nPRESS 1 to TRAVERSE BACKWARD in Link List.\nPRESS 2 to TRAVERSE NORMALLY in Link List.\nPRESS 3 to TRAVERSE MANUALLY in Link List.\nPRESS 4 to EXIT.\n";
 
-        printf("\nEnter the CHOICE for traversing : ");
-        scanf("%d", &choose);
+        cout << "\nEnter the CHOICE for traversing : ";
+        cin >> choose;
         getchar();
 
         switch (choose)
@@ -310,11 +306,11 @@ void traverse_the_list()
         {
             while (traverser->next != head)
             {
-                printf("\nThe DATA in linked list is : %d\n", traverser->info);
+                cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
                 traverser = traverser->next;
             }
 
-            printf("\nThe DATA in linked list is : %d\n", traverser->info);
+            cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
 
             break;
         }
@@ -323,38 +319,38 @@ void traverse_the_list()
             while (traverser->previous != head)
             {
                 traverser = traverser->previous;
-                printf("\nThe DATA in linked list is : %d\n", traverser->info);
+                cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
             }
 
             traverser = traverser->previous;
 
-            printf("\nThe DATA in linked list is : %d\n", traverser->info);
+            cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
             break;
         }
         case 3:
         {
             while (ch != 'n' && ch != 'N')
             {
-                printf("\nPRESS Y to CONTINUE TRAVERSING.\nPRESS N to EXIT.\n");
-                printf("Enter your choice : ");
-                scanf("%c", &ch);
+                cout << "\nPRESS Y to CONTINUE TRAVERSING.\nPRESS N to EXIT.\n";
+                cout << "Enter your choice : ";
+                cin >> ch;
                 getchar();
 
                 if (ch != 'n' && ch != 'N')
                 {
-                    printf("\nPRESS F to TRAVERSE FORWARD.\nPRESS B to TRAVERSE BACKWARD.\n");
-                    printf("Enter your choice : ");
-                    scanf("%c", &ch);
+                    cout << "\nPRESS F to TRAVERSE FORWARD.\nPRESS B to TRAVERSE BACKWARD.\n";
+                    cout << "Enter your choice : ";
+                    cin >> ch;
                     getchar();
 
                     if (ch != 'b' && ch != 'B')
                     {
                         if (traverser == head)
                         {
-                            printf("\nYou are at the STARTING of the LINKED LIST\n");
+                            cout << "\nYou are at the STARTING of the LINKED LIST\n";
                         }
 
-                        printf("\nThe DATA in linked list is : %d\n", traverser->info);
+                        cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
 
                         traverser = traverser->next;
                     }
@@ -364,16 +360,16 @@ void traverse_the_list()
 
                         if (traverser->next == head)
                         {
-                            printf("\nYou are at the STARTING of the LINKED LIST\n");
+                            cout << "\nYou are at the STARTING of the LINKED LIST\n";
                         }
 
-                        printf("\nThe DATA in linked list is : %d\n", traverser->info);
+                        cout << "\nThe DATA in linked list is : " << traverser->info << "\n";
                     }
                 }
                 else
                 {
-                    printf("\nYou choose N.\n");
-                    printf("\n----------EXITING THE MANUAL TRAVERSING SECTION----------\n");
+                    cout << "\nYou chose N.\n";
+                    cout << "\n----------EXITING THE MANUAL TRAVERSING SECTION----------\n";
                     break;
                 }
             }
@@ -382,27 +378,26 @@ void traverse_the_list()
         }
         case 4:
         {
-            printf("\n----------EXITING THE TRAVERSING SECTION----------\n");
+            cout << "\n----------EXITING THE TRAVERSING SECTION----------\n";
             break;
         }
         default:
         {
-            printf("\n----------PLEASE CHOOSE VALID CHOICE----------\n");
+            cout << "\n----------PLEASE CHOOSE VALID CHOICE----------\n";
         }
         }
     }
 }
 
 // Driver Function
-
 int main()
 {
-    printf("PRESS 1 for INSERTING NODE FROM THE BEGINNING.\nPRESS 2 for INSERTING NODE FROM THE MIDDLE.\nPRESS 3 for INSERTING FROM THE END.\nPRESS 4 for DELETION OF NODE FROM THE BEGINNING.\nPRESS 5 for DELETION OF NODE FROM THE MIDDLE.\nPRESS 6 for DELETION OF NODE FROM THE END.\nPRESS 7 for TO TRAVERSR THE LINKED LIST.\nPRESS 8 for EXIT.\n");
+    cout << "PRESS 1 for INSERTING NODE FROM THE BEGINNING.\nPRESS 2 for INSERTING NODE FROM THE MIDDLE.\nPRESS 3 for INSERTING FROM THE END.\nPRESS 4 for DELETION OF NODE FROM THE BEGINNING.\nPRESS 5 for DELETION OF NODE FROM THE MIDDLE.\nPRESS 6 for DELETION OF NODE FROM THE END.\nPRESS 7 for TO TRAVERSE THE LINKED LIST.\nPRESS 8 for EXIT.\n";
 
     while (choice != 8)
     {
-        printf("\nEnter the CHOICE : ");
-        scanf("%d", &choice);
+        cout << "\nEnter the CHOICE : ";
+        cin >> choice;
 
         switch (choice)
         {
@@ -412,7 +407,7 @@ int main()
             {
                 insertion_at_the_beginning();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 2:
@@ -421,7 +416,7 @@ int main()
             {
                 insertion_at_the_middle();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 3:
@@ -430,7 +425,7 @@ int main()
             {
                 insertion_at_the_end();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 4:
@@ -439,7 +434,7 @@ int main()
             {
                 deletion_at_the_beginning();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 5:
@@ -448,7 +443,7 @@ int main()
             {
                 deletion_at_the_middle();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 6:
@@ -457,7 +452,7 @@ int main()
             {
                 deletion_at_the_end();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 7:
@@ -466,17 +461,17 @@ int main()
             {
                 traverse_the_list();
             }
-            printf("\n----------DONE----------\n");
+            cout << "\n----------DONE----------\n";
             break;
         }
         case 8:
         {
-            printf("\n----------EXITING----------\n");
+            cout << "\n----------EXITING----------\n";
             break;
         }
         default:
         {
-            printf("\n----------PLEASE CHOOSE VALID CHOICE----------\n");
+            cout << "\n----------PLEASE CHOOSE VALID CHOICE----------\n";
         }
         }
     }
