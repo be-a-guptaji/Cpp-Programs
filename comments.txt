@@ -1,0 +1,9 @@
+This is a sample text file.
+// This is a single line comment in comment
+This line also contain single line comment after the code. // This is the comment
+/*
+This is a multi line comment 
+It spans to multiple line in the file
+*/
+This is end of file.
+// File Ended
