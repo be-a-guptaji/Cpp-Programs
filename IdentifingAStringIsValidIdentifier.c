@@ -32,9 +32,13 @@ int main()
     gets(identifier);
 
     if (isValidIdentifier(identifier))
+    {
         printf("'%s' is a valid identifier in C.\n", identifier);
+    }
     else
+    {
         printf("'%s' is NOT a valid identifier in C.\n", identifier);
+    }
 
     return 0;
 }
