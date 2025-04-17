@@ -28,6 +28,7 @@ int main()
 {
     char identifier[100];
 
+    // Take input
     printf("Enter an identifier: ");
     gets(identifier);
 
