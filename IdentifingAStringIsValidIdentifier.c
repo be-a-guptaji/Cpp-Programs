@@ -16,7 +16,7 @@ int isValidIdentifier(const char *str)
     // Rest can be letters, digits, or underscore
     for (int i = 1; str[i] != '\0'; i++)
     {
-        if (!isalnum(str[i]) && str[i] != '_')
+        if (!isalnum(str[i]))
             return 0;
     }
 
