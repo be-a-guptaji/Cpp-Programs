@@ -9,17 +9,17 @@ int checkForComments(char line[], int *isCommentStarted, int lineNumber)
         if (line[i] == '/' && line[i + 1] == '/' && *isCommentStarted == 0)
         {
             *isCommentStarted = 1;
-            printf("\nSingle line comment at line number %d: \n", lineNumber);
+            printf("\nSingle line comment at line number : %d \n", lineNumber);
         }
         if (line[i] == '/' && line[i + 1] == '*' && *isCommentStarted == 0)
         {
             *isCommentStarted = 2;
-            printf("\nMulti line comment started at line number %d: \n", lineNumber);
+            printf("\nMulti line comment started at line number : %d \n", lineNumber);
         }
         if (line[i] == '*' && line[i + 1] == '/' && *isCommentStarted == 2)
         {
             printf("*/\n");
-            printf("Multi line comment ended at line number %d: \n", lineNumber);
+            printf("Multi line comment ended at line number : %d \n", lineNumber);
             *isCommentStarted = 0;
         }
         if (*isCommentStarted != 0)
